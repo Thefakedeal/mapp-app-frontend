@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, useMap,Popup } from "react-leaflet";
 import getLocation from "../helpers/location";
+import {setLocation} from '../actions/location'
+import {useSelector, useDispatch} from 'react-redux'
 
 function MapControl({ center, zoom }) {
   const map = useMap();
@@ -11,22 +13,26 @@ function MapControl({ center, zoom }) {
 }
 
 export default function Map({places=[]}) {
-  const [position, setPosition] = useState([26.8065, 87.2846]);
+  const location = useSelector(store=> store.location)
   const [zoom, setZoom] = useState(2);
-
+  const dispatch = useDispatch()
   useEffect(() => {
-    getLocation().then((pos) => {
-      setPosition(pos);
+    if(!location.hasLocation){
+      getLocation().then((pos) => {
+        dispatch(setLocation(pos))
+      });
+    }
+    if(location.hasLocation){
       setZoom(13);
-    });
-  }, []);
+    }
+  }, [location]);
   return (
-    <MapContainer center={position} zoom={zoom} scrollWheelZoom={false} className='map'>
+    <MapContainer center={location.location} zoom={zoom} scrollWheelZoom={false} className='map'>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={position}>
+      <Marker position={location.location}>
         <Popup>Your Location</Popup>
       </Marker>
       {
@@ -38,7 +44,7 @@ export default function Map({places=[]}) {
            </Marker>   
           ))
       }
-      <MapControl center={position} zoom={zoom} />
+      <MapControl center={location.location} zoom={zoom} />
     </MapContainer>
   );
 }

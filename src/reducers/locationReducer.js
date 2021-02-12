@@ -5,7 +5,7 @@ export default function locationReducer(
 ) {
     switch(action.type){
         case SET_LOCATION:
-            return {hasLocation: true, location: action,payload}
+            return {hasLocation: true, location: action.payload}
         default:
             return state
     }
