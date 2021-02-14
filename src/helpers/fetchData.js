@@ -10,6 +10,7 @@ export async function getData({ endpoint = "", search = [] }) {
           'accept': 'application/json'
       }
   });
+  if(!response.ok) throw await response.json();
   const data = await response.json();
   return data;
 }
@@ -24,6 +25,7 @@ export async function postData({endpoint="", body={}, method="POST"}){
         body: JSON.stringify(body)
     } 
     const response = await fetch(endpoint, options);
+    if(!response.ok) throw await response.json();
     const data = await response.json();
     return data;
 }

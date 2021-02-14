@@ -22,5 +22,5 @@ export default function useGetPlaces() {
     useEffect(()=>{
         getPlace()
     },[]);
-    return { err, loading, result }
+    return { err, loading, result, reload: getPlace }
 }

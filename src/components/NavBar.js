@@ -17,13 +17,8 @@ export default function NavBar() {
             <NavDropdown.Item as={Link} to="/">
               Places
             </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
+            <NavDropdown.Item as={Link} to="/places/add">
+              Add Place
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>

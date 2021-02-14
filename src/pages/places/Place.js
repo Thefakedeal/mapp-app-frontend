@@ -19,6 +19,9 @@ export default function Place() {
                 <h3 className='m-2'>
                     {result.name}
                 </h3>
+                <p>
+                    {result.description}
+                </p>
             </Col>
         </Row>
     );
