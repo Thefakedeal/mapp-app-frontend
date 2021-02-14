@@ -16,9 +16,9 @@ export default function Place() {
                 <Map places={[result]}/>
             </Col>
             <Col md={4}>
-                <h5>
+                <h3 className='m-2'>
                     {result.name}
-                </h5>
+                </h3>
             </Col>
         </Row>
     );
