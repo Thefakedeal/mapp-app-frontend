@@ -20,7 +20,7 @@ export default function Places() {
       <Col md={4}>
         {result.map((place) => (
           <PlaceCard key={place._id} place={place} deletePlace = {async ()=>{
-            const confirm_delete = window.confirm("Are You Sure");
+            const confirm_delete = window.confirm("Are You Sure?");
             if(!confirm_delete) return; 
             const places = await postData({endpoint:`/api/v1/places/${place._id}`, method: 'DELETE'})
             reload();

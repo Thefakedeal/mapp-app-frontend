@@ -3,13 +3,15 @@ import {useParams} from 'react-router-dom'
 import useGetPlace from '../../hooks/places/useGetPlace'
 import { Alert, Row,Col,Spinner } from 'react-bootstrap'
 import Map from '../../components/Map'
+import NotFound from '../NotFound'
 
 export default function Place() {
     const { id } = useParams();
     const { err,loading, result } = useGetPlace(id)
-    
+    console.log(result)
     if(loading) return <Spinner animation="grow" role="status"/>
     if(err) return (<Alert variant='danger'>{err}</Alert>)
+    if(!result) return <NotFound />
     return (
         <Row>
             <Col md={8}>

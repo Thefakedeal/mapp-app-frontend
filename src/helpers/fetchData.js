@@ -10,9 +10,10 @@ export async function getData({ endpoint = "", search = [] }) {
           'accept': 'application/json'
       }
   });
-  if(!response.ok) throw await response.json();
-  const data = await response.json();
-  return data;
+  if(response.ok){
+      const data = await response.json();
+      return data;
+  }
 }
 
 export async function postData({endpoint="", body={}, method="POST"}){
